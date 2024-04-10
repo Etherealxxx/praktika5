@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище SteamModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="ID_account" />
+          </Key>
+          <Property Name="ID_account" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_friends" Type="int" Nullable="false" />
+          <Property Name="ID_games" Type="int" Nullable="false" />
+          <Property Name="nick" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="friends">
+          <Key>
+            <PropertyRef Name="ID_friends" />
+          </Key>
+          <Property Name="ID_friends" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nickname" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="games">
+          <Key>
+            <PropertyRef Name="ID_games" />
+          </Key>
+          <Property Name="ID_games" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="singleplayer" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="multiplayer" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="coopgame" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__account__ID_frie__4D94879B">
+          <End Role="friends" Type="Self.friends" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="account" Type="Self.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="friends">
+              <PropertyRef Name="ID_friends" />
+            </Principal>
+            <Dependent Role="account">
+              <PropertyRef Name="ID_friends" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__account__ID_game__4E88ABD4">
+          <End Role="games" Type="Self.games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="account" Type="Self.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="games">
+              <PropertyRef Name="ID_games" />
+            </Principal>
+            <Dependent Role="account">
+              <PropertyRef Name="ID_games" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище SteamModelContainer">
+          <EntitySet Name="account" EntityType="Self.account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="friends" EntityType="Self.friends" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="games" EntityType="Self.games" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__account__ID_frie__4D94879B" Association="Self.FK__account__ID_frie__4D94879B">
+            <End Role="friends" EntitySet="friends" />
+            <End Role="account" EntitySet="account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__account__ID_game__4E88ABD4" Association="Self.FK__account__ID_game__4E88ABD4">
+            <End Role="games" EntitySet="games" />
+            <End Role="account" EntitySet="account" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SteamModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="ID_account" />
+          </Key>
+          <Property Name="ID_account" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_friends" Type="Int32" Nullable="false" />
+          <Property Name="ID_games" Type="Int32" Nullable="false" />
+          <Property Name="nick" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="friends" Relationship="Self.FK__account__ID_frie__4D94879B" FromRole="account" ToRole="friends" />
+          <NavigationProperty Name="games" Relationship="Self.FK__account__ID_game__4E88ABD4" FromRole="account" ToRole="games" />
+        </EntityType>
+        <EntityType Name="friends">
+          <Key>
+            <PropertyRef Name="ID_friends" />
+          </Key>
+          <Property Name="ID_friends" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nickname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="account" Relationship="Self.FK__account__ID_frie__4D94879B" FromRole="friends" ToRole="account" />
+        </EntityType>
+        <EntityType Name="games">
+          <Key>
+            <PropertyRef Name="ID_games" />
+          </Key>
+          <Property Name="ID_games" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="singleplayer" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="multiplayer" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="coopgame" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="account" Relationship="Self.FK__account__ID_game__4E88ABD4" FromRole="games" ToRole="account" />
+        </EntityType>
+        <Association Name="FK__account__ID_frie__4D94879B">
+          <End Role="friends" Type="Self.friends" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="account" Type="Self.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="friends">
+              <PropertyRef Name="ID_friends" />
+            </Principal>
+            <Dependent Role="account">
+              <PropertyRef Name="ID_friends" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__account__ID_game__4E88ABD4">
+          <End Role="games" Type="Self.games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="account" Type="Self.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="games">
+              <PropertyRef Name="ID_games" />
+            </Principal>
+            <Dependent Role="account">
+              <PropertyRef Name="ID_games" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SteamEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="account" EntityType="Self.account" />
+          <EntitySet Name="friends" EntityType="Self.friends" />
+          <EntitySet Name="games" EntityType="Self.games" />
+          <AssociationSet Name="FK__account__ID_frie__4D94879B" Association="Self.FK__account__ID_frie__4D94879B">
+            <End Role="friends" EntitySet="friends" />
+            <End Role="account" EntitySet="account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__account__ID_game__4E88ABD4" Association="Self.FK__account__ID_game__4E88ABD4">
+            <End Role="games" EntitySet="games" />
+            <End Role="account" EntitySet="account" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SteamModelContainer" CdmEntityContainer="SteamEntities">
+          <EntitySetMapping Name="account">
+            <EntityTypeMapping TypeName="SteamModel.account">
+              <MappingFragment StoreEntitySet="account">
+                <ScalarProperty Name="ID_account" ColumnName="ID_account" />
+                <ScalarProperty Name="ID_friends" ColumnName="ID_friends" />
+                <ScalarProperty Name="ID_games" ColumnName="ID_games" />
+                <ScalarProperty Name="nick" ColumnName="nick" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="friends">
+            <EntityTypeMapping TypeName="SteamModel.friends">
+              <MappingFragment StoreEntitySet="friends">
+                <ScalarProperty Name="ID_friends" ColumnName="ID_friends" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="games">
+            <EntityTypeMapping TypeName="SteamModel.games">
+              <MappingFragment StoreEntitySet="games">
+                <ScalarProperty Name="ID_games" ColumnName="ID_games" />
+                <ScalarProperty Name="singleplayer" ColumnName="singleplayer" />
+                <ScalarProperty Name="multiplayer" ColumnName="multiplayer" />
+                <ScalarProperty Name="coopgame" ColumnName="coopgame" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

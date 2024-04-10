@@ -1,0 +1,63 @@
+﻿<Page x:Class="praktika2.AccountEfPage"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:praktika2"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AccountEfPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto" MinHeight="401"/>
+        </Grid.RowDefinitions>
+        <Frame x:Name="frame" Margin="5,5,5,5" NavigationUIVisibility="Hidden" />
+        <DataGrid x:Name="AccountEfGrid" Grid.RowSpan="1" IsReadOnly="True" Margin="5,0,5,313" AutoGenerateColumns="False" SelectionChanged="AccountEfGrid_SelectionChanged" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID_account}" Header="ID_account" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ID_account}" Header="ID_account" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding games_ID}" Header="games_ID" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding nick}" Header="nick" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox
+         x:Name="Search"
+         VerticalAlignment="Top"
+         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="457,170,109,0" Height="39" Grid.Row="1"
+       />
+        <ComboBox
+         x:Name="combo" DisplayMemberPath="nickname"
+         materialDesign:ComboBoxAssist.MaxLength="2"
+         materialDesign:HintAssist.HintOpacity=".26"
+         IsEditable="True" Margin="15,170,600,0" Grid.Row="1" VerticalAlignment="Top" Height="39"          
+>
+        </ComboBox>
+        <Button         
+          Content="Добавить"
+          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+          Style="{StaticResource MaterialDesignRaisedButton}"
+          ToolTip="Resource name: MaterialDesignRaisedButton" Margin="556,296,10,89" Grid.Row="1" Click="Add_Button"
+        />
+        <Button         
+          Content="Изменить"
+          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+          Style="{StaticResource MaterialDesignRaisedButton}"
+          ToolTip="Resource name: MaterialDesignRaisedButton" Margin="283,296,283,89" Grid.Row="1" Click="Change_Button"
+        />
+        <Button         
+          Content="Удалить"
+          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+          Style="{StaticResource MaterialDesignRaisedButton}"
+          ToolTip="Resource name: MaterialDesignRaisedButton" Margin="10,296,551,89" Grid.Row="1" Click="Delete_Button"
+        />
+        <ComboBox
+            x:Name="combo2" DisplayMemberPath="singleplayer"
+            materialDesign:ComboBoxAssist.MaxLength="2"
+            materialDesign:HintAssist.HintOpacity=".26"
+            IsEditable="True" Margin="230,170,385,0" Grid.Row="1" VerticalAlignment="Top" Height="39"          
+/>
+    </Grid>
+</Page>

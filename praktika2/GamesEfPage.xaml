@@ -1,0 +1,52 @@
+﻿<Page x:Class="praktika2.GamesEfPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:praktika2"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GamesEfPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto" MinHeight="401"/>
+        </Grid.RowDefinitions>
+        <Frame x:Name="frame" Margin="5,5,5,5" NavigationUIVisibility="Hidden"/>
+        <DataGrid x:Name="GamesEfGrid" Grid.RowSpan="2" IsReadOnly="True" Margin="5,5,5,262" AutoGenerateColumns="True" SelectionChanged="GamesEfGrid_SelectionChanged"/>
+        <TextBox
+         x:Name="Search2"
+         VerticalAlignment="Center"
+         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="288,0,288,0" Height="38" Grid.Row="1"
+       />
+        <Button         
+          Content="Добавить"
+          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+          Style="{StaticResource MaterialDesignRaisedButton}"
+          ToolTip="Resource name: MaterialDesignRaisedButton" Margin="556,302,10,83" Grid.Row="1" Click="Add_Button"
+        />
+        <Button         
+          Content="Изменить"
+          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+          Style="{StaticResource MaterialDesignRaisedButton}"
+          ToolTip="Resource name: MaterialDesignRaisedButton" Margin="283,302,283,83" Grid.Row="1" Click="Change_Button"
+        />
+        <Button         
+          Content="Удалить"
+          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+          Style="{StaticResource MaterialDesignRaisedButton}"
+          ToolTip="Resource name: MaterialDesignRaisedButton" Margin="10,302,551,83" Grid.Row="1" Click="Delete_Button"
+        />
+        <TextBox
+            x:Name="Search3"
+            VerticalAlignment="Center"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="566,0,10,0" Height="38" Grid.Row="1"
+       />
+        <TextBox
+            x:Name="Search1"
+            VerticalAlignment="Center"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,566,0" Height="38" Grid.Row="1"
+       />
+    </Grid>
+</Page>
